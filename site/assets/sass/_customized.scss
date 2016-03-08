@@ -1,0 +1,168 @@
+@include grid-spaces;
+@include shape-classes;
+@include minimal-height;
+
+// Specific Styles AC Personal
+//
+// Style that will not be re-used across projects can go here
+//
+
+.circle-position-above {
+	position: relative;
+	top: -35px;
+}
+
+.neg-margin {
+	margin-top: -1rem !important;
+}
+
+.padding-0 {
+	padding: 0 !important;
+}
+
+a:hover {
+	@include single-transition(color, 300ms, ease-in);
+}
+
+ul {
+	&.work-style {
+		list-style: none;
+		li {
+			padding-top: 0.5rem;
+		}
+	}
+}
+input {
+	width: 100%;
+	padding: 0.875rem 0.5rem 0.5rem 0.5rem;
+	&.err-highlight {
+		border: 1px solid $blood;
+		background-color: $brain;
+	}
+}
+textarea {
+	width: 100%;
+	padding: 0.875rem 0.5rem 0.5rem 0.5rem;
+}
+@media #{$medium-up} {
+	.form-label {
+		text-align: right !important;
+		padding: 0.875rem 0 0 0.5rem;
+	}
+}
+.error {
+	display: none;
+	p {
+		margin: 0;
+	}
+	&.err-msg {
+		display: block;
+		padding: 0;
+		margin: 0;
+	}
+}
+select {
+	height: 32px;
+	border:1px solid $shadow;
+	box-sizing: border-box;
+}
+
+.optional-text-size {
+	font-size: 0.625rem;
+}
+
+.min-header {
+	min-height: 4.66rem;
+}
+
+#country-selector {
+	z-index: 25;
+}
+
+.animate-slide-right .delay-animate {
+	opacity: 0;
+	@include prefix(animation, slide-in-right 0.3s ease-out forwards);
+}
+@for $i from 2 through 3 {
+	.animate-slide-right .delay-animate:nth-child(#{$i}) {
+		animation-delay : #{($i * 0.1) +'s'};
+	}
+}
+
+.animate-slide-down {
+	z-index: 5;
+	@include prefix(animation, slide-down-in 0.3s ease-out);
+}
+
+.fade-in {
+	@include prefix(animation, fade-slow-in 0.3s ease-out);
+}
+
+@include keyframes(fade-slow-in) {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@include keyframes(slide-down-in){
+	0% {
+		@include prefix(transform, translate3d(0,-100%,0));
+	}
+	50% {
+		@include prefix(transform, translate3d(0,-25%,0));
+	}
+	65% {
+		@include prefix(transform, translate3d(0,0,0));
+		opacity: 0.1;
+	}
+	85% {
+		@include prefix(transform, translate3d(0,25%,0));
+		opacity : 0.65;
+	}
+	100% {
+		@include prefix(transform, translate3d(0,0,0));
+		opacity : 1;
+	}
+}
+
+@include keyframes(slide-in-right) {
+	from {
+		@include prefix(transform, translate3d(300%, 0,0), (moz, webkit));
+	}
+	to {
+		@include prefix(transform, translate3d(0, 0,0), (moz, webkit));
+		opacity: 1;
+	}
+}
+
+
+/* Foooter */
+.footer, footer {
+	position: absolute;
+	background-color: $vadar;
+	padding-top: 1rem;
+	width: 100%;
+	display: block;
+	div {
+		ul {
+			list-style: none;
+			li {
+				float: left;
+			}
+			.icon:before {
+				font-size: rem-calc(24);
+				color: $cloud;
+			}
+			.icon.disabled:before {
+				color: $unused;
+			}
+		}
+	}
+	.copyright {
+		color: $cloud;
+	}
+
+}

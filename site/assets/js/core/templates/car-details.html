@@ -1,0 +1,17 @@
+<div class="background-color-casper">
+	<img class="padding-5-sides" src="<%- data.img %>" />
+</div>
+<div class="text-center padding-10 padding-10-sides background-color-firstbank" data-equalizer-watch>
+	<h4><%- data.model %> <%- data.type %></h4>
+	<p>&euro; <%- data.cost %></p>
+	<p><%- data.details %></p>
+	<p>Passengers : <%- data.seats %></p>
+	<p>Doors : <%- data.doors %></p>
+	<% var hasAirCon = (data.ac) ? 'Air Conditioning' : '' %>
+	<p><%- hasAirCon %></p>
+</div>
+<div class="row">
+	<div class="columns">
+		<button class="flat expand js-select-car">Select Car</button>
+	</div>
+</div>

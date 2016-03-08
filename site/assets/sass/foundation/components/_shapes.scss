@@ -1,0 +1,62 @@
+//Shapes demo starts
+@mixin rectangle($width, $height) {
+	width: $width + "px";
+	height: $height + "px";
+}
+
+@mixin parallelogram($width, $height, $skew) {
+	@include rectangle($width, $height);
+	transform: skew($skew);
+}
+
+@mixin square($size) {
+	@include rectangle($size, $size);
+}
+
+@mixin circle($size, $border-size) {
+	@include square($size);
+	border-radius: $border-size;
+}
+
+@mixin triangle($direction, $size, $color) {
+	width: 0;
+	height: 0;
+
+	@if $direction == 'up' { 
+		border-right: $size solid transparent;
+		border-bottom: $size * 1.732 solid $color; 
+		border-left: $size solid transparent; 
+	} @else if $direction == 'down' {
+		border-top: $size * 1.732 solid $color; 
+		border-right: $size solid transparent; 
+		border-left: $size solid transparent; 
+	} @else if $direction == 'left' {
+		border-top: $size solid transparent; 
+		border-right: $size * 1.732 solid $color; 
+		border-bottom: $size solid transparent; 
+	} @else if $direction == 'right' {
+		border-top: $size solid transparent; 
+		border-bottom: $size solid transparent; 
+		border-left: $size * 1.732 solid $color; 
+	}
+}
+
+@mixin corner-triangle($corner, $size, $color) {
+	width: 0;
+	height: 0;
+
+	@if $corner == 'top-left' { 
+		border-top: $size solid $color;
+		border-right: $size solid transparent;
+	} @else if $corner == 'top-right' {
+		border-top: $size solid $color;
+		border-left: $size solid transparent; 
+	} @else if $corner == 'bottom-left' {
+		border-right: $size solid transparent;
+		border-bottom: $size solid $color;
+	} @else if $corner == 'bottom-right' {
+		border-bottom: $size solid $color;
+		border-left: $size solid transparent;
+	}
+}
+

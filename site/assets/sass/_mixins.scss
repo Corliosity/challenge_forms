@@ -1,0 +1,294 @@
+@mixin prefix($property, $value, $prefixes: (ms, moz, webkit)) {
+  @each $prefix in $prefixes {
+    #{'-' + $prefix + '-' + $property}: $value;
+  }
+ 
+  // Output standard non-prefixed declaration
+  #{$property}: $value;
+}
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @-o-keyframes #{$animation-name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+
+@mixin slide-in-animate($name: 'slide-in-right') {
+  @include keyframes($name) {
+    @if $name == 'slide-in-right' {
+      from {
+        @include prefix(transform, translate3d(-100%, 0,0), (moz, webkit));
+      }
+      to {
+        @include prefix(transform, translate3d(0, 0,0), (moz, webkit));
+      }
+    }
+    @else if $name == 'slide-out-left' {
+      from {
+        @include prefix(transform, translate3d(0, 0,0), (moz, webkit));
+      }
+      to {
+        @include prefix(transform, translate3d(200%, 0,0), (moz, webkit));
+      }
+    }
+    @else if $name == 'slide-out-right' {
+      from {
+        @include prefix(transform, translate3d(0, 0,0), (moz, webkit));
+      }
+      to {
+        @include prefix(transform, translate3d(-100%, 0,0), (moz, webkit));
+      }
+    }
+    @else {
+      from {
+        @include prefix(transform, translate3d(100%, 0,0), (moz, webkit));
+      }
+      to {
+        @include prefix(transform, translate3d(0, 0,0), (moz, webkit));
+      }
+    }
+  }
+}
+
+@import "foundation/components/shapes";
+
+/* MIXIN FUNCTIONS */
+// Color settings
+@mixin color-setting() {
+  @each $current-color in $color-groups {
+    $i : index($color-groups, $current-color);
+    .text-color-#{$i} {
+      color: $current-color;
+    }
+  }
+}
+
+// SHAPES Mixin
+@mixin shape-classes($size:both) {
+  @for $i from 1 through 5 {
+    $shape-border: #{($i * 100) / 2 + "px"};
+    $class: #{$i * 5};
+    $shape-size: #{($i * 1000)/ 10};
+    $size-class: "";
+    @if ($size != both) {
+      size-class: #{"-on-"+$size};
+    }
+
+    .shape#{$size-class}-#{$class}-circle {
+      @include circle($shape-size, $shape-border);
+      border-color: $shadow;
+      background: $vadar;
+    }
+
+    .shape#{$size-class}-#{$class}-square {
+      @include square($shape-size);
+      border-color: $shadow;
+      background: $vadar;
+    }
+  }
+}
+
+//  These are classes which can be created as helpers such as padding and adding in the prefixes when necessary
+@mixin grid-spaces($size:both) {
+	@for $i from 0 through 16 {
+		$rem: #{($i * 5) / 10 + "rem"};
+		$class: #{$i * 5};
+		$size-class: "";
+		@if ($size != both) {
+			$size-class: #{"-on-"+$size};
+		}
+
+		.padding#{$size-class}-#{$class} {
+			padding-bottom: $rem;
+			padding-top: $rem;
+		}
+
+		.padding#{$size-class}-#{$class}-bottom {
+			padding-bottom: $rem;
+		}
+
+		.padding#{$size-class}-#{$class}-top {
+			padding-top: $rem;
+		}
+
+    .padding#{$size-class}-#{$class}-sides {
+      padding-left: $rem;
+      padding-right: $rem;
+    }
+
+		.margin#{$size-class}-#{$class} {
+			margin-top: $rem !important;
+			margin-bottom: $rem !important;
+		}
+
+		.margin#{$size-class}-#{$class}-top {
+			margin-top: $rem;
+		}
+
+		.margin#{$size-class}-#{$class}-bottom {
+			margin-bottom: $rem;
+		}
+
+    .margin#{$size-class}-#{$class}-sides {
+      margin-right: $rem;
+      margin-left: $rem;
+    }
+
+    .margin#{$size-class}-#{$class}-right {
+      margin-right: $rem;
+    }
+	}
+}
+
+@mixin minimal-height() {
+  @for $i from 1 through 10 {
+    $rem: #{($i * 10) / 2 + "rem"};
+    $class: #{$i * 10};
+
+    .min-height-#{$class} {
+      min-height: $rem;
+    }
+  }
+}
+
+//
+// @MIXIN
+//
+// We use this mixin to create a default button base.
+//
+// $style - Sets base styles. Can be set to false. Default: true.
+// $display - Used to control display property. Default: $button-display || inline-block
+
+@mixin button-base($style:true, $display:$button-display) {
+  @if $style {
+    border-style: $button-border-style;
+    border-width: $button-border-width;
+    cursor: $cursor-pointer-value;
+    font-family: $button-font-family;
+    font-weight: $button-font-weight;
+    line-height: normal;
+    margin: 0 0 $button-margin-bottom;
+    position: relative;
+    text-decoration: none;
+    text-align: $button-font-align;
+    -webkit-appearance: none;
+    -webkit-border-radius:0;
+  }
+  @if $display { display: $display; }
+}
+
+// @MIXIN
+//
+// We use this mixin to add button size styles
+//
+// $padding - Used to build padding for buttons Default: $button-med ||= rem-calc(12)
+// $full-width - We can set $full-width:true to remove side padding extend width - Default: false
+
+@mixin button-size($padding:$button-med, $full-width:false) {
+
+  // We control which padding styles come through,
+  // these can be turned off by setting $padding:false
+  @if $padding {
+    padding-top: $padding;
+    padding-#{$opposite-direction}: $padding * 2;
+    padding-bottom: $padding + rem-calc(1);
+    padding-#{$default-float}: $padding * 2;
+
+    // We control the font-size based on mixin input.
+    @if      $padding == $button-med { font-size: $button-font-med; }
+    @else if $padding == $button-tny { font-size: $button-font-tny; }
+    @else if $padding == $button-sml { font-size: $button-font-sml; }
+    @else if $padding == $button-lrg { font-size: $button-font-lrg; }
+  }
+
+  // We can set $full-width:true to remove side padding extend width.
+  @if $full-width {
+    // We still need to check if $padding is set.
+    @if $padding {
+    padding-top: $padding;
+    padding-bottom: $padding + rem-calc(1);
+    } @else if $padding == false {
+      padding-top:0;
+      padding-bottom:0;
+    }
+    padding-right: 0;
+    padding-left: 0;
+    width: 100%;
+  }
+}
+
+// @MIXIN
+//
+// We use this mixin to add button color styles
+//
+// $bg - Primary color set in settings file. Default: $primary-color.
+// $radius - If true, set to button radius which is $global-radius || explicitly set radius amount in px (ex. $radius:10px). Default: true
+// $disabled - We can set $disabled:true to create a disabled transparent button. Default: false
+@mixin button-style($bg:$primary-color, $bc:$button-primary-border-color, $letterpress:$button-primary-letterpress-color, $radius:false, $disabled:false) {
+
+  // We control which background styles are used,
+  // these can be removed by setting $bg:false
+  @if $bg {
+    // This find the lightness percentage of the background color.
+    $bg-lightness: lightness($bg);
+
+    background-color: $bg;
+    border-color: $bc;
+    &:hover,
+    &:focus { background-color: scale-color($bg, $lightness: $button-function-factor); }
+
+    // We control the text color for you based on the background color.
+    @if $bg-lightness > 70% {
+      color: $letterpress;
+      &:hover,
+      &:focus { color: $button-font-color-alt; }
+    }
+    @else {
+      color: $button-font-color;
+      &:hover,
+      &:focus { color: $letterpress; }
+    }
+  }
+
+  // We can set $disabled:true to create a disabled transparent button.
+  @if $disabled {
+    cursor: $cursor-default-value;
+    opacity: $button-disabled-opacity;
+    box-shadow: none;
+    &:hover,
+    &:focus { background-color: $bg; }
+  }
+  @include radius($button-radius);
+
+  // We can control how much button radius us used.
+  @if $radius == true { @include radius($button-radius); }
+  @else if $radius { @include radius($radius); }
+
+}
+
+// @MIXIN
+//
+// We use this to quickly create buttons with a single mixin. As @jaredhardy puts it, "the kitchen sink mixin"
+//
+// $padding - Used to build padding for buttons Default: $button-med ||= rem-calc(12)
+// $bg - Primary color set in settings file. Default: $primary-color.
+// $radius - If true, set to button radius which is $global-radius || explicitly set radius amount in px (ex. $radius:10px). Default:false.
+// $full-width - We can set $full-width:true to remove side padding extend width. Default:false.
+// $disabled - We can set $disabled:true to create a disabled transparent button. Default:false.
+// $is-input - <input>'s and <button>'s take on strange padding. We added this to help fix that. Default:false.
+// $is-prefix - Not used? Default:false.
+@mixin button($padding:$button-med, $bg:$primary-color, $radius:false, $full-width:false, $disabled:false, $is-prefix:false) {
+  @include button-base;
+  @include button-size($padding, $full-width);
+  @include button-style($bg, $radius, $disabled);
+}

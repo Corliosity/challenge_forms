@@ -1,0 +1,101 @@
+.background-image,
+.background-content {
+	background-repeat: no-repeat;
+	background-clip: border-box;
+    position: relative;
+    background-color: transparent;
+    &:before {
+		position: absolute;
+		content: " ";
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-size: cover;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		overflow: hidden;
+		opacity: 0;
+		@include single-transition(all, 800ms, ease-in);
+    }
+    &.background-show {
+    	&:before {
+    		opacity: 1;
+    	}
+    }
+}
+
+.background-content {
+	&.co-winter:before {
+		background-image:radial-gradient(rgba(255,255,255,0.6), rgba(0,0,0,0.6)), url('/assets/img/background/co-winter.jpg');
+	}
+	&.se-summer:before {
+		background-image: radial-gradient(rgba(255,255,255,0.3), rgba(0,0,0,0.3)), url('/assets/img/background/se-summer.jpg');
+	}
+	&.co-hockey:before {
+		background-image: radial-gradient(rgba(255,255,255,0.3), rgba(0,0,0,0.3)), url('/assets/img/background/hockey.jpg');
+	}
+}
+@for $i from 1 through length($color-groups) {
+  .background-color-#{nth($color-names, $i)} {
+    background: nth($color-groups, $i) !important;
+    position: inherit;
+  }
+}
+
+@mixin show-background($frames: 5, $static: 20%, $name: 'show-background') {
+
+	$animating: (100% - $frames * $static) / ($frames - 1);
+	@-webkit-keyframes #{$name} {
+		@for $i from 0 to $frames {
+
+			$current-frame: ($i * $static) + ($i * $animating);
+			#{$current-frame} {
+				transform: translatey((100% * $i/ $frames + 100) * -1);
+				@if $i < 3 {
+					filter: blur(($i * -10 / $frames + 10)px);
+				}
+				opactiy: 1 * $i / $frames;
+			}
+		}
+	}
+}
+
+@keyframes show-background {
+  0% {
+    max-height: 0;
+    opactiy: 0;
+  }
+  20% {
+    min-height: 8rem;
+    opactiy: 0;
+  }
+  40% {
+    min-height: 15rem;
+    opactiy: 0;
+  }
+  65% {
+    min-height: 30rem;
+    opactiy: 0.35;
+  }
+  100% {
+  	min-height: 15rem;
+  	opacity: 1;
+  }
+}
+
+
+.hobby {
+	margin: 0 0 0.25rem 0;
+	padding:0;
+	max-height: 0rem;
+	&:before {
+		background-position-y: 70%;
+	}
+	&.show {
+		animation: show-background .3s ease-out;
+		max-height: 15rem;
+		height: 15rem;
+	}
+}

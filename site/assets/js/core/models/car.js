@@ -1,0 +1,1 @@
+Rental.Car = Backbone.Model.extend({});

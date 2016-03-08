@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+	<head>
+		<title>Avis - Rental</title>
+		<link rel="stylesheet" href="./assets/js/lib/jquery.autocomplete/jquery-ui.css">
+		<!--cssmain begin-->
+		<link rel="stylesheet" href="./assets/css/main.css">
+		<!--cssmain end-->
+		<!--begin startup-->
+		<script build-into="startup" src="./assets/js/lib/jquery/2.2.0/jquery-2.2.0.min.js"></script>
+		<script build-into="startup" src="./assets/js/lib/jquery.autocomplete/jquery-ui.min.js"></script>
+		<script build-into="startup" src="./assets/js/lib/jquery.autocomplete/jquery.select-to-autocomplete.js"></script>
+		<script build-into="startup" src="./assets/js/lib/modernizr/modernizr.js"></script>
+		<script build-into="startup" src="./assets/js/lib/underscore/1.8.3/underscore.js"></script>
+		<script build-into="startup" src="./assets/js/lib/backbone/1.2.3/backbone.js"></script>
+		<script build-into="startup" src="./assets/js/lib/backbone.marionette/core/backbone.marionette.js"></script>
+		<!--end startup-->
+	</head>
+	<body>
+		<header>
+			<div class="contain-to-grid background-color-blood min-header">
+				<nav class="top-bar" data-topbar>
+					<ul class="title-area">
+						<li class="name"></li>
+						<li class="toggle-topbar menu-icon">
+							<a href="javascript:void(0);">
+								<span class="screen-reader-text"> Menu </span>
+							</a>
+						</li>
+						<section class="top-bar-section">
+							<ul class="left row collapse">
+								<li>
+									<img src="./assets/img/avis_logo.jpg" alt="Avis Logo" />
+								</li>
+							</ul>
+						</section>
+					</ul>
+				</nav>
+			</div>
+		</header>
+    <div class="row margin-5">
+      <div class="medium-4 columns">
+        <h1 class="text-size-16">Rental Inquiry</h1>
+      </div>
+      <div class="medium-6 columns">
+        <!-- Form Navigation -->
+      </div>
+      <div class="medium-2 columns padding-5-top">
+        <select id="language" name="language">
+          <option value="">Select your Language</option>
+          <option value="en" selected>English</option>
+        </select>
+      </div>
+    </div>
+		<div class="row">
+			<div id="spa-container" class="medium-12 columns padding-5-sides"> </div>
+		</div>
+		<footer class="contain-to-grid">
+			<div>
+				<ul>
+					<li>Footer Content</li>
+				</ul>
+			</div>
+		</footer>
+		<!--template begin-->
+		<script src="./assets/js/core/compiled-templates.js"></script>
+		<!--template end-->
+		<!--begin core-->
+		<script build-into="core" src="./assets/js/lib/foundation.min.js"></script>
+		<script build-into="core" src="./assets/js/lib/foundation/foundation.dropdown.js"></script>
+		<script build-into="core" src="./assets/js/lib/backbone.stickit/0.9.2/backbone.stickit.js"></script>
+	    <!--core end-->
+	    <!--begin jsapp-->
+		<script build-into="jsapp" src="./assets/js/core/app-config.js"></script>
+		<script build-into="jsapp" src="./assets/js/core/models/applicationState.js"></script>
+		<script build-into="jsapp" src="./assets/js/core/models/rental.js"></script>
+		<script build-into="jsapp" src="./assets/js/core/models/car.js"></script>
+		<script build-into="jsapp" src="./assets/js/core/collections/cars.js"></script>
+		<script build-into="jsapp" src="./assets/js/core/views/mainView.js"></script>
+		<script build-into="jsapp" src="./assets/js/core/views/titleView.js"></script>
+		<script build-into="jsapp" src="./assets/js/core/views/pageOne.js"></script>
+		<script build-into="jsapp" src="./assets/js/core/views/country.js"></script>
+		<script build-into="jsapp" src="./assets/js/core/views/stateDropdown.js"></script>
+		<script build-into="jsapp" src="./assets/js/core/views/carView.js"></script>
+		<script build-into="jsapp" src="./assets/js/core/views/carPickerView.js"></script>
+		<script build-into="jsapp" src="./assets/js/core/controller.js"></script>
+		<script build-into="jsapp" src="./assets/js/core/router.js"></script>
+		<script build-into="jsapp" src="./assets/js/core/app.js"></script>
+		<!--end jsapp-->
+		<script>
+			$(document).ready(function() {
+				$(document).foundation();
+			});
+		</script>
+	</body>
+</html>

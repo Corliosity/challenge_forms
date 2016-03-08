@@ -1,0 +1,115 @@
+@font-face {
+	font-family: 'corliss-icon';
+	src:url('../fonts/icomoon.eot?tn76vi');
+	src:url('../fonts/icomoon.eot?tn76vi#iefix') format('embedded-opentype'),
+		url('../fonts/icomoon.ttf?tn76vi') format('truetype'),
+		url('../fonts/icomoon.woff?tn76vi') format('woff'),
+		url('../fonts/icomoon.svg?tn76vi#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'corliss-icon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+span {
+	&.icon-mountains,
+	&.icon-hockey,
+	&.icon-camera {
+		height: 2rem;
+		border: 1px solid $ikea;
+		padding: 8.3%;
+	}
+	&:hover {
+		@include single-transition(color, 300ms, ease-in);
+		&.icon-mountains:before,
+		&.icon-hockey:before,
+		&.icon-camera:before {
+			color: $darkocean;
+			@include single-transition(color, 300ms, ease-in);
+		}
+	}
+
+}
+.icon-home:before {
+	content: $icon-home;
+}
+.icon-podcast:before {
+	content: $icon-podcast;
+}
+.icon-spinner:before {
+	content: $icon-spinner;
+}
+.icon-star-empty:before {
+	content: $icon-star-empty;
+}
+.icon-star-full:before {
+	content: $icon-star-full;
+}
+.icon-warning:before {
+	content: $icon-warning;
+}
+.icon-notification:before {
+	content: $icon-notification;
+}
+.icon-info:before {
+	content: $icon-info;
+}
+.icon-cancel-circle:before {
+	content: $icon-cancel-circle;
+}
+.icon-play2:before {
+	content: $icon-play2;
+}
+.icon-pause:before {
+	content: $icon-pause;
+}
+.icon-stop:before {
+	content: $icon-stop;
+}
+.icon-volume-high:before {
+	content: $icon-volume-high;
+}
+.icon-volume-mute:before {
+	content: $icon-volume-mute;
+}
+.icon-mail:before {
+	content: $icon-mail;
+}
+.icon-facebook:before {
+	content: $icon-facebook;
+}
+.icon-instagram:before {
+	content: $icon-instagram;
+}
+.icon-twitter:before {
+	content: $icon-twitter;
+}
+.icon-feed2:before {
+	content: $icon-feed2;
+}
+.icon-youtube:before {
+	content: $icon-youtube;
+}
+.icon-github:before {
+	content: $icon-github;
+}
+.icon-mountains:before {
+	content: $icon-mountains;
+}
+.icon-hockey:before {
+	content: $icon-hockey;
+}
+.icon-camera:before {
+	content: $icon-camera;
+}
